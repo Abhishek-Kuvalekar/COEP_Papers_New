@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block header_content %}
+    <style type = "text/css">
+        .collapsible {
+            margin-left: 5%;
+            margin-right: 40%;
+            margin-top: 1%;
+            margin-bottom: 3%;
+        }
+        .year-headings {
+            margin-left: 5%;
+            margin-bottom: 1%;
+        }
+    </style>
+   <script type = "text/javascript">
+        /*var tmp = document.getElementById({{ contentDict['branchName'].toString }}).classList;
+        tmp.add("active red")*/
+        $("#{{ contentDict['branchName'] }}").addClass("red");
+   </script>
+{% endblock %}
+
+{%  block main_content %}
+    {% if (contentDict['branchName'] == 'FY') %}
+        {% for key in contentDict %}
+            {% if((key != 'path') and (key != 'branchName')) %}
+                <h3 class = "year-headings red-text">{{ key }}</h3><br/>
+                <ul class = "collapsible popout" data-collapsible = "expandable">
+                    {% for sub in contentDict[key] %}
+                        <li>
+                            <div class = "collapsible-header hoverable">{{ sub }}</div>
+                            <div class = "collapsible-body">
+                                <ul>
+                                    {% for eachFile in contentDict[key][sub] %}
+                                        <li>
+                                            <a href = "/static/papers/{{ contentDict['branchName']}}/{{ key }}/{{ sub }}/{{eachFile}}"  >{{ eachFile }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for key in ['SY', 'TY', 'BTech', 'Elective'] %}
+            {% if(contentDict.get(key, None) != None) %}
+                <h3 class = "year-headings red-text">{{ key }}</h3><br/>
+                <ul class = "collapsible popout" data-collapsible = "expandable">
+                    {% for sub in contentDict[key] %}
+                    <li>
+                        <div class = "collapsible-header hoverable">{{ sub }}</div>
+                        <div class = "collapsible-body">
+                            <ul>
+                                {% for eachFile in contentDict[key][sub] %}
+                                <li>
+                                    <a href = "/static/papers/{{ contentDict['branchName']}}/{{ key }}/{{ sub }}/{{eachFile}}"  >{{ eachFile }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
