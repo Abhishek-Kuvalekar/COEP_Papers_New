@@ -1,3 +1,5 @@
 #!flask/bin/python
 from app import app
-app.run(debug = True)
+from flask_script import Manager
+manager = Manager(app)
+manager.run()
