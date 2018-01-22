@@ -21,36 +21,72 @@
                 display: flex;
                 min-height: 100vh;
                 flex-direction: column;
+                margin-left: 25%;
+                width: 75%;
             }
-
+            
             main {
                 flex: 1 0 auto;
             }
             
+            .side-nav {
+                margin-left: 0%;
+                width: 25%;
+            }
+            
+            @media only screen and (max-width: 640px) {
+                body{
+                    display: flex;
+                    min-height: 100vh;
+                    flex-direction: column;
+                    margin-left: 0%;
+                    width: 100%;
+                }
+                
+                main {
+                    flex: 1 0 auto;
+                }
+                
+                .side-nav {
+                    width: 0%;
+                    margin-left: 0%;
+                }
+                
+                /*.nav-wrapper a {
+                    font-size: 15px !important;
+                }*/
+                
+            }
         </style>
+        <script type = "text/javascript">
+            function openNav() {
+                var nav = document.getElementById("nav-mobile");
+                nav.style.width = "80%";
+            }
+        </script>
         {% block header_content %}{% endblock %}
     </head>
     
     <body>
         <header>
-            <nav class = "top-nav red" id = "top-nav" style = "margin-left: 25%; width: 75%;">
+            <nav class = "top-nav red" id = "top-nav">
                 <div class = "container">
-                    <a class = "button-collapse top-nav full hide-on-large-only" href = "#" data-activates = "nav-mobile" onclick = "openNav()">
+                    <a class = "button-collapse top-nav full show-on-small-only" href = "javascript: void(0)" onclick = "openNav()">
                         <i class = "material-icons">menu</i>
                     </a>
                 </div>
                 <div class = "container center-align">
                     <div class = "nav-wrapper">
                         {% if header_title %}
-                            <a class = "page-title" href = "#!" style = "font-size: 28px;"> {{ header_title }}</a>
+                            <a class = "page-title flow-text" href = "#!" /*style = "font-size: 28px;"*/> {{ header_title }}</a>
                         {% else %}
-                            <a class = "page-title" href = "#" style = "font-size: 28px;">COEP Papers</a>
+                            <a class = "page-title flow-text" href = "#" /*style = "font-size: 28px;"*/>COEP Papers</a>
                         {% endif %}
                     </div>
                 </div>
             </nav>
             
-            <ul id = "nav-mobile" class = "side-nav fixed" style = "transform: translateX(0%); width: 25%; margin-left: 0%;">
+            <ul id = "nav-mobile" class = "side-nav fixed" style = "transform: translateX(0%);">
                 <li class = "logo center-align">
                     <a id = "logo-container" class = "brand-logo" href = "{{ url_for('homepage') }}"><img src = "../static/img/coep_logo.png" class = "img-responsive" style = "margin-top: 4%; margin-right: 13%;"></a>
                 </li>
@@ -98,13 +134,13 @@
             </ul>
         </header>
         
-        <main style = "margin-left: 25%; width: 75%;">
+        <main>
             {% block main_content %}
             
             {% endblock %}
         </main>
         
-        <footer class = "page-footer red" id = "page-footer" style = "margin-left: 25%; width: 75%;">
+        <footer class = "page-footer red" id = "page-footer">
             <div class = "container">
                 <div class = "row">
                     <div class = "col l3 s12">
