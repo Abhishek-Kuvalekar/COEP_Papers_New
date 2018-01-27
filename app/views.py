@@ -5,7 +5,8 @@ import os
 @app.route('/')
 def homepage():
     'Renders home.html.'
-    return render_template('home.html')
+    contentDict = dict()
+    return render_template('home.html', contentDict = contentDict)
 
 @app.route('/branch/<branchName>')
 def showContent(branchName = None):

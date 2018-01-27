@@ -92,39 +92,75 @@
                     </div>
                 </li>-->
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Civil')}}" id = "Civil"  style = "font-size: 13px;">Civil Engineering</a>
+                    {% if contentDict.get('branchName') == "Civil" %}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Civil')}}" id = "Civil"  style = "font-size: 13px;">Civil Engineering</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Civil')}}" id = "Civil"  style = "font-size: 13px;">Civil Engineering</a>
+                    {% endif %}
                 </li>
                 
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Computer and IT')}}" id = "Computer Engineering and IT" style = "font-size: 13px;">Computer Engineering and IT</a>
+                    {% if contentDict.get('branchName') == "Computer and IT"%}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Computer and IT')}}" id = "Computer Engineering and IT" style = "font-size: 13px;">Computer Engineering and IT</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Computer and IT')}}" id = "Computer Engineering and IT" style = "font-size: 13px;">Computer Engineering and IT</a>
+                    {% endif %}    
                 </li>
                 
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Electrical')}}" id = "Electrical Engineering" style = "font-size: 13px;">Electrical Engineering</a>
+                    {% if contentDict.get('branchName') == "Electrical" %}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Electrical')}}" id = "Electrical Engineering" style = "font-size: 13px;">Electrical Engineering</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Electrical')}}" id = "Electrical Engineering" style = "font-size: 13px;">Electrical Engineering</a>
+                    {% endif %}
                 </li>
                 
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'E & TC')}}" id = "Electronics and Telecommunication Engineering" style = "font-size: 13px;">Electronics and Telecommunication Engineering</a>
+                    {% if contentDict.get('branchName') == "E & TC" %}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'E & TC')}}" id = "Electronics and Telecommunication Engineering" style = "font-size: 13px;">Electronics and Telecommunication Engineering</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'E & TC')}}" id = "Electronics and Telecommunication Engineering" style = "font-size: 13px;">Electronics and Telecommunication Engineering</a>
+                    {% endif %}
                 </li>
                 
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Instrumentation')}}" id = "Instrumentation and Control Engineering" style = "font-size: 13px;">Instrumentation and Control Engineering</a>
+                    {% if contentDict.get('branchName') == "Instrumentation" %}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Instrumentation')}}" id = "Instrumentation and Control Engineering" style = "font-size: 13px;">Instrumentation and Control Engineering</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Instrumentation')}}" id = "Instrumentation and Control Engineering" style = "font-size: 13px;">Instrumentation and Control Engineering</a>
+                    {% endif %}
                 </li>
                 
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Mechanical')}}" id = "Mechanical Engineering" style = "font-size: 13px;">Mechanical Engineering</a>
+                    {% if contentDict.get('branchName') == "Mechanical" %}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Mechanical')}}" id = "Mechanical Engineering" style = "font-size: 13px;">Mechanical Engineering</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Mechanical')}}" id = "Mechanical Engineering" style = "font-size: 13px;">Mechanical Engineering</a>
+                    {% endif %}
                 </li>
                 
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Metallurgy')}}" id = "Metallurgy" style = "font-size: 13px;">Metallurgy</a>
+                    {% if contentDict.get('branchName') == "Metallurgy" %}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Metallurgy')}}" id = "Metallurgy" style = "font-size: 13px;">Metallurgy</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Metallurgy')}}" id = "Metallurgy" style = "font-size: 13px;">Metallurgy</a>
+                    {% endif %}
                 </li>
                 
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Planning')}}" id = "Planning"  style = "font-size: 13px;">Planning</a>
+                    {% if contentDict.get('branchName') == "Planning" %}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Planning')}}" id = "Planning"  style = "font-size: 13px;">Planning</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Planning')}}" id = "Planning"  style = "font-size: 13px;">Planning</a>
+                    {% endif %}
                 </li>
                 
                 <li class = "bold">
-                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Production')}}" id = "Production Engineering" style = "font-size: 13px;">Production Engineering</a>
+                    {% if contentDict.get('branchName') == "Production" %}
+                        <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Production')}}" id = "Production Engineering" style = "font-size: 13px;">Production Engineering</a>
+                    {% else %}
+                        <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'Production')}}" id = "Production Engineering" style = "font-size: 13px;">Production Engineering</a>
+                    {% endif %}
                 </li>
             </ul>
         </header>
