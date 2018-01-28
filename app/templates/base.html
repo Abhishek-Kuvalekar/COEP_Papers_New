@@ -34,6 +34,15 @@
                 width: 25%;
             }
             
+            input:not([type]), input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, input:focus, input:focus-within {
+                border-bottom-color: white;
+                outline: none;
+            }
+            
+            #nav-mobile {
+                overflow-y: scroll;
+            }
+            
             @media only screen and (max-width: 640px) {
                 body{
                     display: flex;
@@ -50,6 +59,15 @@
                 .side-nav {
                     width: 0%;
                     margin-left: 0%;
+                }
+                
+                input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, input[type=search]:focus {
+                    border-bottom: none !important;
+                    outline: none;
+                }
+                
+                #nav-mobile {
+                    overflow-y: scroll;
                 }
             }
         </style>
@@ -86,11 +104,24 @@
                     <a id = "logo-container" class = "brand-logo" href = "{{ url_for('homepage') }}"><img src = "../static/img/coep_logo.png" class = "img-responsive" style = "margin-top: 4%; margin-right: 13%;"></a>
                 </li>
                 <br /><br /><br /><br />
-                <!--<li class = "search">
-                    <div class = "search-wrapper card" style = "margin-left: 5%; margin-right: 5%;">
-                        <input id = "search" style = "height: 1%; width: 80%; margin-left: 5%; margin-right: 15%;" class = "browser-default"><i class = "material-icons" style = "margin-left: 85%; margin-top: 0%;">search</i>
+                <li class = "search">
+                    <div class = "table-wrapper card" style = "margin-left: 5%; margin-right: 5%; height: 50px;">
+                        <form action = "" method = "post" name = "Search">
+                            {{ form.hidden_tag() }}
+                            <table style = "height: 50px;">
+                                <tr>
+                                    <td style = "width: 90%; padding: 0%;">
+                                        <!--<input id = "search" class = "browser-default black-text">-->
+                                        {{ form.searchKey(size = 80) }}
+                                    </td>
+                                    <td style = "padding: 0%;">
+                                        <i class = "material-icons align-right" id = "search-icon">search</i>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
-                </li>-->
+                </li>
                 <li class = "bold">
                     {% if contentDict.get('branchName') == "Civil" %}
                         <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Civil')}}" id = "Civil"  style = "font-size: 13px;">Civil Engineering</a>

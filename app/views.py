@@ -1,14 +1,20 @@
-from flask import render_template
+from flask import render_template, flash, redirect
 from app import app
+from .forms import SearchForm
 import os
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def homepage():
     'Renders home.html.'
+    
     contentDict = dict()
-    return render_template('home.html', contentDict = contentDict)
+    form = SearchForm()
+    if(form.validate_on_submit()):
+        """Add code for keyword search."""
+        return redirect('/')
+    return render_template('home.html', contentDict = contentDict, form = form)
 
-@app.route('/branch/<branchName>')
+@app.route('/branch/<branchName>', methods = ['GET', 'POST'])
 def showContent(branchName = None):
     'Creates a dictionary of contents of each branch directory.'
     
@@ -17,6 +23,7 @@ def showContent(branchName = None):
     
     path = 'app/static/papers/' + branchName
     contentDict = dict()
+    form = SearchForm()
     
     for year in os.listdir(path):
         if(not os.path.isdir(path + '/' + year)):
@@ -29,4 +36,4 @@ def showContent(branchName = None):
             contentDict[year][sub] = os.listdir(path + '/' + year + '/' + sub)
         
     contentDict['branchName'] = branchName
-    return render_template('content.html', contentDict = contentDict, header_title = branchName)
+    return render_template('content.html', contentDict = contentDict, header_title = branchName, form = form)
