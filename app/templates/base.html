@@ -122,6 +122,15 @@
                         </form>
                     </div>
                 </li>
+                
+                <li class = "bold">
+                    {% if contentDict.get('branchName') == "FY" %}
+                    <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'FY') }}" id = "FY" style = "font-size: 13px;">First Year</a>
+                    {% else %}
+                    <a class = "waves-effect waves-red" href = "{{ url_for('showContent', branchName = 'FY') }}" id = "FY" style = "font-size: 13px;">First Year</a>
+                    {% endif %}
+                </li>
+                
                 <li class = "bold">
                     {% if contentDict.get('branchName') == "Civil" %}
                         <a class = "waves-effect waves-red red" href = "{{ url_for('showContent', branchName = 'Civil')}}" id = "Civil"  style = "font-size: 13px;">Civil Engineering</a>
