@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect
 from app import app
 from .forms import SearchForm
+from app import searchBar
 import os
 
 @app.route('/', methods = ['GET', 'POST'])
@@ -11,7 +12,9 @@ def homepage():
     form = SearchForm()
     if(form.validate_on_submit()):
         """Add code for keyword search."""
-        return redirect('/')
+        contentList = searchBar.grep(form.searchKey.data)
+        return render_template('searchResult.html', contentList = [item.decode() for item in contentList], form = SearchForm(), contentDict = contentDict)    
+    
     return render_template('home.html', contentDict = contentDict, form = form)
 
 @app.route('/branch/<branchName>', methods = ['GET', 'POST'])
