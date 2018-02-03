@@ -33,9 +33,51 @@
             width: 60%;
         }
         
+        .my-syllabus-chip {
+            position: absolute;
+            left: 72%;
+            top: 3%;
+        }
+        
+        .my-download-chip {
+            position: absolute;
+            left: 85%;
+            top: 3%;
+        }
+        
+        .my-download-chip a, .my-syllabus-chip a {
+            color: white;
+        }
+        
+        .collapsible-header a i {
+            padding: 3px;
+            color: white;
+            position: absolute;
+            left: 70%;
+        }
+        
         @media only screen and (max-width: 468px) {
             .my-card {
                 width: 90%;
+            }
+            
+            .my-syllabus-chip {
+                position: absolute;
+                left: 47%;
+                top: 3%;
+            }
+            
+            .my-download-chip {
+                position: absolute;
+                left: 72%;
+                top: 3%;
+            }
+            
+            .collapsible-header a i {
+                padding: 3px;
+                color: white;
+                position: absolute;
+                left: 60%;
             }
         }
     </style>
@@ -46,11 +88,22 @@
         {% for key in contentDict %}
             {% if((key != 'path') and (key != 'branchName')) %}
                 <div class = "card hoverable my-card grey lighten-5" id = "{{ key }}">
+                    <div class = "chip my-download-chip red hoverable" title = "Download all papers of this class.">
+                        <a href = "#">Download</a>
+                    </div>
+                    <div class = "chip my-syllabus-chip red hoverable">
+                        <a href = "#">Syllabus</a>
+                    </div>
                     <h3 class = "year-headings red-text">{{ key }}</h3><br/>
                     <ul class = "collapsible popout" data-collapsible = "expandable">
                         {% for sub in contentDict[key] %}
                             <li>
-                                <div class = "collapsible-header hoverable">{{ sub }}</div>
+                                <div class = "collapsible-header hoverable">
+                                    <span class = "title">{{ sub }}</span>
+                                    <a href = "#">
+                                        <i class = "material-icons circle red hoverable" title = "Download all papers in this folder.">get_app</i>
+                                    </a>
+                                </div>
                                 <div class = "collapsible-body">
                                     <ul>
                                         {% for eachFile in contentDict[key][sub] %}
@@ -88,11 +141,24 @@
         {% for key in ['SY', 'TY', 'BTech', 'Elective'] %}
             {% if(contentDict.get(key, None) != None) %}
                 <div class = "card my-card hoverable grey lighten-5" id = "{{ key }}">
+                    {% if(key != 'Elective' )%}
+                        <div class = "chip my-download-chip red hoverable" title = "Download all papers of this class.">
+                            <a href = "#">Download</a>
+                        </div>
+                        <div class = "chip my-syllabus-chip red hoverable">
+                            <a href = "#">Syllabus</a>
+                        </div>
+                    {% endif %}
                     <h3 class = "year-headings red-text">{{ key }}</h3><br/>
                     <ul class = "collapsible popout" data-collapsible = "expandable">
                         {% for sub in contentDict[key] %}
                             <li>
-                                <div class = "collapsible-header hoverable">{{ sub }}</div>
+                                <div class = "collapsible-header hoverable">
+                                    <span class = "title">{{ sub }}</span>
+                                    <a href = "#">
+                                        <i class = "material-icons circle red hoverable" title = "Download all papers in this folder.">get_app</i>
+                                    </a>
+                                </div>
                                 <div class = "collapsible-body">
                                     <ul>
                                         {% for eachFile in contentDict[key][sub] %}
