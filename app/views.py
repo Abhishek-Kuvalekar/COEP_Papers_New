@@ -40,3 +40,19 @@ def showContent(branchName = None):
         
     contentDict['branchName'] = branchName
     return render_template('content.html', contentDict = contentDict, header_title = branchName, form = form)
+
+@app.route('/compressed/<branchName>/<year>')
+@app.route('/compressed/<branchName>/<year>/<subject>')
+def giveCompressedFolder(branchName = None, year = None, subject = None):
+    if(branchName == None):
+        return;
+    if(year == None):
+        return;
+    path = "app/static/papers/" + branchName + "/" + year
+    filename = branchName + "_" + year
+    if(subject != None):
+        path += "/" + subject
+        filename += "_" + subject
+    filename += ".tar.gz"
+    os.system('tar -czf ' + "app/static/" + filename + " " + path)
+    return redirect("/static/" + filename)

@@ -50,7 +50,7 @@
         }
         
         .collapsible-header a i {
-            padding: 3px;
+            padding: 2px;
             color: white;
             position: absolute;
             left: 70%;
@@ -74,7 +74,7 @@
             }
             
             .collapsible-header a i {
-                padding: 3px;
+                padding: 2px;
                 color: white;
                 position: absolute;
                 left: 60%;
@@ -89,7 +89,7 @@
             {% if((key != 'path') and (key != 'branchName')) %}
                 <div class = "card hoverable my-card grey lighten-5" id = "{{ key }}">
                     <div class = "chip my-download-chip red hoverable" title = "Download all papers of this class.">
-                        <a href = "#">Download</a>
+                        <a href = "{{ url_for('giveCompressedFolder', branchName = contentDict['branchName'], year = key) }}">Download</a>
                     </div>
                     <div class = "chip my-syllabus-chip red hoverable">
                         <a href = "#">Syllabus</a>
@@ -100,7 +100,7 @@
                             <li>
                                 <div class = "collapsible-header hoverable">
                                     <span class = "title">{{ sub }}</span>
-                                    <a href = "#">
+                                    <a href = "{{ url_for('giveCompressedFolder', branchName = contentDict['branchName'], year = key, subject = sub) }}">
                                         <i class = "material-icons circle red hoverable" title = "Download all papers in this folder.">get_app</i>
                                     </a>
                                 </div>
@@ -143,7 +143,7 @@
                 <div class = "card my-card hoverable grey lighten-5" id = "{{ key }}">
                     {% if(key != 'Elective' )%}
                         <div class = "chip my-download-chip red hoverable" title = "Download all papers of this class.">
-                            <a href = "#">Download</a>
+                            <a href = "{{ url_for('giveCompressedFolder', branchName = contentDict['branchName'], year = key) }}">Download</a>
                         </div>
                         <div class = "chip my-syllabus-chip red hoverable">
                             <a href = "#">Syllabus</a>
@@ -155,7 +155,7 @@
                             <li>
                                 <div class = "collapsible-header hoverable">
                                     <span class = "title">{{ sub }}</span>
-                                    <a href = "#">
+                                    <a href = "{{ url_for('giveCompressedFolder', branchName = contentDict['branchName'], year = key, subject = sub) }}">
                                         <i class = "material-icons circle red hoverable" title = "Download all papers in this folder.">get_app</i>
                                     </a>
                                 </div>
