@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect
 from app import app
 from .forms import SearchForm
 from app import searchBar
-import os
+import os, os.path, time, subprocess, datetime
 
 def createDict(contentList):
     'Creates a dictionary of the list obtained from search result.'
@@ -20,6 +20,24 @@ def createDict(contentList):
         contentDict[itemList[3]][itemList[4]][itemList[5]].append(itemList[6])
         
     return contentDict
+    
+def clearMess(difference):
+    'Deletes all the tar.gz files created "difference" minutes before.'
+    path = 'app/static'
+    output = os.listdir(path)
+    currentTime = int(str(datetime.datetime.now()).split(' ')[1].split(':')[0]) * 60 + int(str(datetime.datetime.now()).split(' ')[1].split(':')[1])
+    for item in output:
+        if(item == ''):
+            break
+        if('gz' not in item):
+            continue
+        tmp = time.ctime(os.path.getctime(path + "/" + item))
+        tmp1 = tmp.split(' ')[3]
+        tmp2 = tmp1.split(':')
+        creationTime = 60 * int(tmp2[0]) + int(tmp2[1])
+        if(difference <= (currentTime - creationTime)):
+            os.remove(path + "/" + item)
+    return
     
 @app.route('/', methods = ['GET', 'POST'])
 def homepage():
@@ -63,6 +81,7 @@ def giveCompressedFolder(branchName = None, year = None, subject = None):
         return;
     if(year == None):
         return;
+    clearMess(5)
     path = "app/static/papers/" + branchName + "/" + year
     filename = branchName + "_" + year
     if(subject != None):
