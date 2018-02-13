@@ -28,10 +28,12 @@ def sub(a, b):
 	else:
 		return 2
 
-'''def printMatrix(mat):
+'''
+def printMatrix(mat):
 	for i in mat:
 		print i
 '''
+
 def mindistance(keyword, dictionary):	
 	#dictionary = ['math', 'mathematics', 'software' ,'graphics']
 	#keyword = 'graph'

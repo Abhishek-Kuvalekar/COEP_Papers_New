@@ -1,6 +1,93 @@
 {%extends "base.html" %}
+
+{% block header_content %}
+    <style type = "text/css">
+        .collapsible {
+            margin-left: 5%;
+            margin-right: 20%;
+            margin-top: 1%;
+            margin-bottom: 3%;
+        }
+        .year-headings {
+            margin-left: 5%;
+            margin-bottom: 1%;
+        }
+
+        #internal-nav {
+            width: 15%;
+            padding: 0%;
+            position: absolute;
+            top: 25vh;
+            left: 80%;
+        }
+
+        #internal-nav table tr td {
+            text-align: center;
+        }
+
+        .my-card {
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+            margin-left: 5%;
+            margin-top: 6vh;
+            width: 60%;
+        }
+
+        @media only screen and (max-width: 468px) {
+            .my-card {
+                width: 90%;
+            }
+        }
+    </style>
+{% endblock %}
 {% block main_content %}
-    {% for item in contentList %}
-        <p>{{ item }}</p>
+    {% for branch in searchDict %}
+        {% if(branch == 'FY') %}
+            {% for class in searchDict[branch] %}
+                <div class = "card hoverable my-card grey lighten-5">
+                    <h3 class = "year-headings red-text">{{ branch }} | {{ class }}</h3><br />
+                    <ul class = "collapsible popout" data-collapsible = "expandable">
+                        {% for sub in searchDict[branch][class] %}
+                            <li>
+                                <div class = "collapsible-header hoverable">{{ sub}}</div>
+                                <div class = "collapsible-body">
+                                    <ul>
+                                        {% for flink in searchDict[branch][class][sub] %}
+                                            <li>
+                                                <a href = "/static/papers/{{ branch }}/{{ class }}/{{ sub }}/{{ flink }}">{{ flink }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% for class in ['SY', 'TY', 'BTech', 'Elective'] %}
+                {% if(searchDict[branch].get(class, None) != None) %}                
+                    <div class = "card hoverable my-card grey lighten-5">
+                        <h3 class = "year-headings red-text">{{ branch }} | {{ class }}</h3><br />
+                        <ul class = "collapsible popout" data-collapsible = "expandable">
+                            {% for sub in searchDict[branch][class] %}
+                            <li>
+                                <div class = "collapsible-header hoverable">{{ sub}}</div>
+                                <div class = "collapsible-body">
+                                    <ul>
+                                        {% for flink in searchDict[branch][class][sub] %}
+                                        <li>
+                                            <a href = "/static/papers/{{ branch }}/{{ class }}/{{ sub }}/{{ flink }}">{{ flink }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     {% endfor %}
 {% endblock %}
