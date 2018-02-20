@@ -34,16 +34,53 @@
                 width: 25%;
             }
             
-            input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, input[type=search]:focus {
+            /*input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, input[type=search]:focus {
                 border-bottom: none !important;
                 outline: none;
-            }
+            }*/
             
             #nav-mobile {
                 overflow-y: scroll;
                 overflow-y: -moz-scrollbars-vertical;
             }
             
+            #request-form {
+                position: fixed;
+                width: 50%;
+                height: auto;
+                margin-right: 10%;
+                margin-left: 13%;
+                margin-top: 7%;
+                display: none;
+            }
+            
+            #upload-form {
+                position: fixed;
+                width: 50%;
+                height: auto;
+                margin-right: 10%;
+                margin-left: 13%;
+                margin-top: 7%;
+                display: none;
+            }
+            
+            #clear-request-form {
+                position: absolute;
+                left: 96%;
+                top: 2%;
+                cursor: pointer;
+            }
+            
+            #clear-upload-form {
+                position: absolute;
+                left: 96%;
+                top: 2%;
+                cursor: pointer;
+            }
+            
+            .my-warning {
+                font-size: 15px;
+            }
             @media only screen and (max-width: 640px) {
                 body{
                     display: flex;
@@ -62,14 +99,36 @@
                     margin-left: 0%;
                 }
                 
-                input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, input[type=search]:focus {
+                /*input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, input[type=search]:focus {
                     border-bottom: none !important;
                     outline: none;
-                }
+                }*/
                 
                 #nav-mobile {
                     overflow-y: scroll;
                     overflow-y: -moz-scrollbars-vertical;
+                }
+                
+                #request-form {
+                    position: fixed;
+                    width: 90%;
+                    height: auto;
+                    margin-right: 5%;
+                    margin-left: 5%;
+                    margin-top: 7%;
+                    overflow-x: scroll;
+                    display: none;
+                }
+
+                #upload-form {
+                    position: fixed;
+                    width: 90%;
+                    height: auto;
+                    margin-right: 5%;
+                    margin-left: 5%;
+                    margin-top: 7%;
+                    overflow-x: scroll;
+                    display: none;
                 }
             }
         </style>
@@ -78,11 +137,66 @@
                 var nav = document.getElementById("nav-mobile");
                 nav.style.width = "80%";
             }
+            
+            function showRequestForm() {
+                var request = document.getElementById("request-form");
+                request.style.display = "block";
+                request.style.zIndex = "2";
+            }
+
+            function showUploadForm() {
+                var upload = document.getElementById("upload-form");
+                upload.style.display = "block";
+                upload.style.zIndex = "2";
+            }
+
+            function closeRequestForm() {
+                var request = document.getElementById("request-form");
+                request.style.display = "none";
+            }
+
+            function closeUploadForm() {
+                var upload = document.getElementById("upload-form");
+                upload.style.display = "none";
+            }
         </script>
         {% block header_content %}{% endblock %}
     </head>
     
     <body>
+        <div class = "card grey lighten-3 z-depth-5" id = "request-form">
+            <div class = "card-content">
+                <i class = "material-icons circle hoverable" onclick = "closeRequestForm()" id = "clear-request-form">clear</i>
+                <span class = "card-title center-align">Request A Paper</span>
+                <form action = "" method = "post" name = "Request">
+                    {{ requestForm.hidden_tag() }}
+                    <ul class = "my-forms">
+                        <li>Branch: {{ requestForm.branch_request }}</li>
+                        <li>Year: {{ requestForm.year_request }}</li>
+                        <li>Subject: {{ requestForm.sub_request }}</li>
+                        <li class = "center-align"><input type = "submit" value = "Request"></li>
+                    </ul>
+                </form>
+                <p class = "red-text my-warning center-align">*For first year put 'First Year' in Branch and 'None' in 'Year'.</p>
+            </div>
+        </div>
+        <div class = "card grey lighten-3 z-depth-5" id = "upload-form">
+            <div class = "card-content">
+                <i class = "material-icons circle hoverable" onclick = "closeUploadForm()" id = "clear-upload-form">clear</i>
+                <span class = "card-title center-align">Upload A Paper</span>
+                <form action = "" method = "post" name = "Upload">
+                    {{ uploadForm.hidden_tag() }}
+                    <ul class = "my-forms">
+                        <li>Branch: {{ uploadForm.branch }}</li>
+                        <li>Year: {{ uploadForm.year }}</li>
+                        <li>Subject: {{ uploadForm.sub }}</li>
+                        <li>Paper:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ uploadForm.paper() }}</li>
+                        <li class = "center-align"><input type = "submit" value = "Upload"></li>
+                    </ul>
+                </form>
+                <p class = "red-text my-warning center-align">*For first year put 'First Year' in Branch and 'None' in 'Year'.</p>
+            </div>
+        </div>
         <header>
             <nav class = "top-nav red" id = "top-nav">
                 <div class = "container">
@@ -219,13 +333,13 @@
                     <div class = "col l3 s12">
                         <h5 class = "white-text">Aim</h5>
                         <p class = "grey-text text-lighten-4">We aim to provide all the end semester papers together at one place. You will find almost all papers here. If you could not find any paper you can request it here.</p>
-                        <a class = "btn waves-effect waves-light red lighten-1 hoverable" href = "#">Request papers</a>
+                        <a class = "btn waves-effect waves-light red lighten-1 hoverable" href = "#" onclick = "showRequestForm()">Request papers</a>
                     </div>
                     <div class = "col l1"></div>
                     <div class = "col l3 s12">
                         <h5 class = "white-text">Help this site grow</h5>
                         <p class = "grey-text text-lighten-4">We hope you have enjoyed this site and if you feel like it has helped you out and want it to grow you can help us by providing us papers.</p>
-                        <a class = "btn waves-effect waves-light red lighten-1 hoverable" href = "#">Upload papers</a>
+                        <a class = "btn waves-effect waves-light red lighten-1 hoverable" href = "#" onclick = "showUploadForm()">Upload papers</a>
                         <br /> <br />
                     </div>
                     <div class = "col l1"></div>
