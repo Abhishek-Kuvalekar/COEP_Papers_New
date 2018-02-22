@@ -1,10 +1,11 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request
 from app import app, mail
 from .forms import SearchForm, RequestForm, UploadForm
 from app import searchBar
 import os, os.path, time, subprocess, datetime
 from flask_mail import Message
 from config import ADMINS
+from werkzeug.utils import secure_filename 
 
 def createDict(contentList):
     'Creates a dictionary of the list obtained from search result.'
@@ -47,16 +48,16 @@ def requestPaper(form):
     msg.html = 'Branch: ' + form.branch_request.data + '<br />' + 'Year: ' + form.year_request.data + '<br />' + 'Subject: ' + form.sub_request.data
     with app.app_context():
         mail.send(msg)
-    return "hello"
+    return redirect('/')
 
 def uploadPaper(form):
     msg = Message('New upload request', sender = ADMINS[0], recipients = ADMINS)
     msg.body = 'text body'
     msg.html = 'Branch: ' + form.branch.data + '<br />' + 'Year: ' + form.year.data + '<br />' + 'Subject: ' + form.sub.data
-    msg.attach(form.paper.name, 'application/octect-stream', form.paper.read())
+    msg.attach(form.paper.name, 'application/pdf', request.files[form.paper.name].read())
     with app.app_context():
         mail.send(msg)
-    return "world"
+    return redirect('/')
     
 @app.route('/', methods = ['GET', 'POST'])
 def homepage():

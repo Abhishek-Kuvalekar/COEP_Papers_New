@@ -184,7 +184,7 @@
             <div class = "card-content">
                 <i class = "material-icons circle hoverable" onclick = "closeUploadForm()" id = "clear-upload-form">clear</i>
                 <span class = "card-title center-align">Upload A Paper</span>
-                <form action = "" method = "post" name = "Upload">
+                <form action = "" method = "post" name = "Upload" enctype="multipart/form-data">
                     {{ uploadForm.hidden_tag() }}
                     <ul class = "my-forms">
                         <li>Branch: {{ uploadForm.branch }}</li>

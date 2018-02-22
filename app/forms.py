@@ -14,4 +14,4 @@ class UploadForm(Form):
     branch = StringField('branch', validators = [DataRequired()])
     year = StringField('year', validators = [DataRequired()])
     sub = StringField('sub', validators = [DataRequired()])
-    paper = FileField('Logo', validators = [Required()])
+    paper = FileField('paper', validators = [Required()])
