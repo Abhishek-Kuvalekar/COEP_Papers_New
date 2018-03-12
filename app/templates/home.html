@@ -1,1 +1,58 @@
 {% extends "base.html" %}
+{% block header_content %}
+    <style type = "text/css">
+        #intro {
+            padding: 2%;
+            text-align: center;
+        }
+        header {
+            margin-bottom: 0%;
+        }
+        #logo-image {
+            width: 25%;
+            height: 25%;
+            border: none;
+        }
+        #middle-advertise {
+            border-left: solid black 1px;
+            border-right: solid black 1px;
+        }
+        @media only screen and (max-width: 640px) {
+            #intro {
+                padding: 10%;
+                text-align: center;
+            }
+            #logo-image {
+                width: 40%;
+                height: 40%;
+                border: none;
+            }
+            #middle-advertise {
+                border-left: none;
+                border-right: none;
+            }
+        }
+    </style>
+{% endblock %}
+{% block main_content %}
+    <div id = "intro" class = "red white-text flow-text">
+        <p class = "flow-text">A website to get you COEP end semester examination papers all in one place.</p>
+    </div>
+    <div id = "logo" class = "center-align">
+        <img src = "../static/img/logo.png" id = "logo-image">
+    </div>
+    <div class = "row">
+        <div class = "col m4 center-align">
+            <h5 class = "red-text">Find papers easily</h5>
+            <p>Find papers by clicking appropriate branch in side navigation bar and selecting appropriate year and subject.</p>
+        </div>
+        <div class = "col m4 center-align" id = "middle-advertise">
+            <h5 class = "red-text">Bulk Download</h5>
+            <p>You can download whole folder of each subject/year as per your choice. The folder will be downloaded in tar.gz compression.</p>
+        </div>
+        <div class = "col m4 center-align">
+            <h5 class = "red-text">Request and upload facility</h5>
+            <p>You can help us by requesting and/or uploading papers by clicking Request and/or Upload buttons in footer.</p>
+        </div>
+    </div>
+{% endblock %}
