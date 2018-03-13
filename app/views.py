@@ -14,6 +14,7 @@ def createDict(contentList):
         if(item.decode() == ''):
             continue
         itemList = item.decode().split('/')
+        print(itemList)
         if(contentDict.get(itemList[3], None) == None):
             contentDict[itemList[3]] = dict()
         if(contentDict[itemList[3]].get(itemList[4], None) == None):
@@ -72,7 +73,7 @@ def homepage():
         return uploadPaper(uploadForm)
     if(form.validate_on_submit()):
         searchDict = createDict(searchBar.grep(form.searchKey.data))
-        return render_template('searchResult.html', searchDict = searchDict, form = SearchForm(), contentDict = contentDict)    
+        return render_template('searchResult.html', searchDict = searchDict, form = SearchForm(), contentDict = contentDict, requestForm = requestForm, uploadForm = uploadForm)    
     
     return render_template('home.html', contentDict = contentDict, form = form, requestForm = requestForm, uploadForm = uploadForm)
 
@@ -93,7 +94,7 @@ def showContent(branchName = None):
         return uploadPaper(uploadForm)
     if(form.validate_on_submit()):
         searchDict = createDict(searchBar.grep(form.searchKey.data))
-        return render_template('searchResult.html', searchDict = searchDict, form = SearchForm(), contentDict = contentDict)   
+        return render_template('searchResult.html', searchDict = searchDict, form = SearchForm(), contentDict = contentDict, requestForm = requestForm, uploadForm = uploadForm)   
     
     for year in os.listdir(path):
         if(not os.path.isdir(path + '/' + year)):
